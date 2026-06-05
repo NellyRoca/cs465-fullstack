@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
 //Due to the guide being outdated, I am using an older version of Mongoose
+//Because this was written for an older version, there are errors when seeding
+//I was able to revert back to mongoose@6.13.9
 // That being said, to prevent the warning when starting up, I am adding:
 mongoose.set('strictQuery', true);
 
