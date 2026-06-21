@@ -1,5 +1,7 @@
 const express = require('express'); // Express App
 const router = express.Router(); // Router logic
+var cors = require('cors');
+router.use(cors());
 
 // Importing controllers to route
 const tripsController = require("../controllers/trips");

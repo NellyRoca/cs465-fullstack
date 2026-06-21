@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var cors = require('cors');
+// Using cors to allow Localhost:4200 to use 3000
 
 var indexRouter = require('./app_server/routes/index');
 var usersRouter = require('./app_server/routes/users');
@@ -15,6 +17,11 @@ var hbs = require('hbs');
 require('./app_api/models/db');
 
 var app = express();
+
+// ENABLE CORS
+app.use(cors({
+  origin: 'http://localhost:4200'
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
