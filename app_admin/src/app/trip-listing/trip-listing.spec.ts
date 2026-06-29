@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TripListing } from './trip-listing';
+import { TripListing } from './trip-listing.component';
 
 describe('TripListing', () => {
   let component: TripListing;

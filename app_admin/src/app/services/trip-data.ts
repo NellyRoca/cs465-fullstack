@@ -1,20 +1,30 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
 import { Trip } from '../models/trip';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
-
 export class TripDataService {
 
-    constructor(private http: HttpClient) {}    
+  private url = 'http://localhost:3000/api/trips';
 
-    getTrips() : Observable<Trip[]> {
-        let url = 'http://localhost:3000/api/trips';
+  constructor(private http: HttpClient) {}
 
-        return this.http.get<Trip[]>(url);
-    }
+  getTrips(): Observable<Trip[]> {
+    return this.http.get<Trip[]>(this.url + '?ts=' + Date.now());
+  }
+
+  addTrip(trip: Trip): Observable<Trip> {
+    return this.http.post<Trip>(this.url, trip);
+  }
+
+  getTrip(tripCode: string): Observable<Trip> {
+    return this.http.get<Trip>(this.url + '/' + tripCode);
+  }
+
+  updateTrip(formData: Trip): Observable<Trip> {
+    return this.http.put<Trip>(this.url + '/' + formData.code, formData);
+  }
 }

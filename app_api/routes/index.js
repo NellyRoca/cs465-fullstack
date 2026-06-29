@@ -1,19 +1,28 @@
-const express = require('express'); // Express App
-const router = express.Router(); // Router logic
-var cors = require('cors');
+const express = require('express');
+const router = express.Router();
+const cors = require('cors');
+
 router.use(cors());
 
-// Importing controllers to route
-const tripsController = require("../controllers/trips");
+const tripsController = require('../controllers/trips');
+const authController = require('../controllers/authentication');
+const auth = require('../config/authentication');
 
-// Define route for trips endpoint
-router
-    .route('/trips')
-    .get(tripsController.tripsList); // GET Method routes tripList
+// TEST
+router.get('/test', (req, res) => {
+  res.json({ status: "API working" });
+});
 
-// GET Method routes tripsFindByCode - requires parameter
-router
-    .route('/trips/:tripCode')
-    .get(tripsController.tripsFindByCode);
+// AUTH
+router.post('/register', authController.register);
+router.post('/login', authController.login);
+
+// PUBLIC
+router.get('/trips', tripsController.tripsList);
+router.get('/trips/:tripCode', tripsController.tripsFindByCode);
+
+// PROTECTED
+router.post('/trips', auth, tripsController.tripsAddTrip);
+router.put('/trips/:tripCode', auth, tripsController.tripsUpdateTrip);
 
 module.exports = router;

@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { TripListingComponent } from './trip-listing/trip-listing';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, TripListingComponent],
+  imports: [CommonModule, RouterModule],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrls: ['./app.css']
 })
 export class App {
-  protected readonly title = 'Travlr Getaways Admin!';
+  title = 'Travlr Getaways Admin';
 }
